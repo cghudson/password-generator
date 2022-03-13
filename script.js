@@ -4,12 +4,29 @@
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+//randomized list function
+function randomInt(min, max) {
+  if (!max) {
+    max = min
+    min = 0
+  }
+
+  var rand = Math.random()
+  return Math.floor(min*(1 - rand) + rand*max)
+}
+
+function getRandomItem(list) {
+  return list[randomInt(list.length)]
+}
+
+// generate password function
 function generatePassword() {
 
   var userInput = window.prompt("How many characters would you like your password to be?")
 
   var passwordLength = parseInt(userInput)
 
+  //password length and input prompts
   if (isNaN(passwordLength)) {
     window.alert("Please input a number!")
     return;
@@ -20,49 +37,58 @@ function generatePassword() {
     return;
   }
 
+  // password criteria prompts
   var lowercase = window.confirm("Click OK to include lowercase letters in your password")
   var uppercase = window.confirm("Click OK to include uppercase letters in your password")
   var number = window.confirm("Click OK to include numbers in your password")
   var symbol = window.confirm("Click OK to include special characters in your password")
 
-  var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-  var uppercase = []
-  var number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-  var symbol = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", " < ", "=", " > ", " ? ", "@", "[", "]", " ^ ", "_", "`", "{", "|", "}", "~"]
+  //password character options
+  var lowercaseList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+  var uppercaseList = []
+  var numberList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+  var symbolList = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"]
 
   var characterOptions = []
 
-  for (var i = 0; i < lowercase.list; i++) {
-    uppercase[i] = lowercase[i].toUpperCase()
+  //change lowercase to uppercase characters
+  for (var i = 0; i < lowercaseList.length; i++) {
+    uppercaseList[i] = lowercaseList[i].toUpperCase()
   }
 
+  //character option choices for user
   if (lowercase === true) {
-    characterOptions.push(lowercase)
+    characterOptions.push(lowercaseList)
   }
 
   if (uppercase === true) {
-    characterOptions.push(uppercase)
+    characterOptions.push(uppercaseList)
   }
 
   if (number === true) {
-    characterOptions.push(number)
+    characterOptions.push(numberList)
   }
 
   if (symbol === true) {
-    characterOptions.push(symbol)
+    characterOptions.push(symbolList)
   }
 
-  var password = ""
-  
-// prompt user for password criteria
-//    choose password length (8-128)
-//    define characters: lowercase, uppercase, numbers, special characters
-// validate input
-//    ensure proper length / valid input / at least one type selected
-// generate password
+  //alert to make sure at least one character option chosen
+  if (characterOptions.length === 0) {
+    window.alert("Please select at least one character option!")
+    return;
+  }
 
-// display generated password
-  return "generated password";
+  //generate random password with user selected criteria
+  var password = ""
+
+  for (var i = 0; i < passwordLength; i++) {
+    var randomList = getRandomItem(characterOptions)
+    var randomChar = getRandomItem(randomList)
+    password += randomChar
+  }
+  
+  return password
 }
 
 // Write password to the #password input
