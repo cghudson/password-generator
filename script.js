@@ -12,10 +12,10 @@ function randomInt(min, max) {
   }
 
   var rand = Math.random()
-  return Math.floor(min*(1 - rand) + rand*max)
+  return Math.floor(min * (1 - rand) + rand * max)
 }
 
-function getRandomItem(list) {
+function pickRandomItem(list) {
   return list[randomInt(list.length)]
 }
 
@@ -83,8 +83,8 @@ function generatePassword() {
   var password = ""
 
   for (var i = 0; i < passwordLength; i++) {
-    var randomList = getRandomItem(characterOptions)
-    var randomChar = getRandomItem(randomList)
+    var randomList = pickRandomItem(characterOptions)
+    var randomChar = pickRandomItem(randomList)
     password += randomChar
   }
   
