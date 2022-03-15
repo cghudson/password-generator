@@ -14,12 +14,12 @@ function generatePassword() {
 
   if (isNaN(passwordLength)) {
     window.alert("Please input a number!")
-    return;
+    return "Please input a number!";
   }
 
   if (passwordLength < 8 || passwordLength > 128) {
     window.alert("Password length must be between 8 and 128 characters")
-    return;
+    return "Password length must be between 8 and 128 characters";
   }
 
   // password criteria prompts
@@ -61,7 +61,7 @@ function generatePassword() {
   //alert to make sure at least one character option chosen
   if (characterOptions.length === 0) {
     window.alert("Please select at least one character option!")
-    return;
+    return "Please select at least one character option!";
   }
 
   //generate random password with user selected criteria
