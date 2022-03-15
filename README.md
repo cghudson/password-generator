@@ -12,7 +12,7 @@ This application allows users to generate a random password between 8 and 128 ch
 ## Preview:
 The following GIF demonstrates the web application's appearance and functionality:
 
-![GIF of password generator]()
+![GIF of password generator](password-generator-preview.gif)
 
 ---
 
