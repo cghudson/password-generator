@@ -4,29 +4,14 @@
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-//randomized list function
-function randomInt(min, max) {
-  if (!max) {
-    max = min
-    min = 0
-  }
-
-  var rand = Math.random()
-  return Math.floor(min * (1 - rand) + rand * max)
-}
-
-function pickRandomItem(list) {
-  return list[randomInt(list.length)]
-}
-
 // generate password function
 function generatePassword() {
 
+  //password length and input prompts
   var userInput = window.prompt("How many characters would you like your password to be?")
 
   var passwordLength = parseInt(userInput)
 
-  //password length and input prompts
   if (isNaN(passwordLength)) {
     window.alert("Please input a number!")
     return;
@@ -57,20 +42,20 @@ function generatePassword() {
   }
 
   //character option choices for user
-  if (lowercase === true) {
-    characterOptions.push(lowercaseList)
+  if (lowercase) {
+    characterOptions = characterOptions.concat(lowercaseList)
   }
 
-  if (uppercase === true) {
-    characterOptions.push(uppercaseList)
+  if (uppercase) {
+    characterOptions = characterOptions.concat(uppercaseList)
   }
 
-  if (number === true) {
-    characterOptions.push(numberList)
+  if (number) {
+    characterOptions = characterOptions.concat(numberList)
   }
 
-  if (symbol === true) {
-    characterOptions.push(symbolList)
+  if (symbol) {
+    characterOptions = characterOptions.concat(symbolList)
   }
 
   //alert to make sure at least one character option chosen
@@ -80,16 +65,15 @@ function generatePassword() {
   }
 
   //generate random password with user selected criteria
-  var password = ""
+  var randomPassword = ""
 
   for (var i = 0; i < passwordLength; i++) {
-    var randomList = pickRandomItem(characterOptions)
-    var randomChar = pickRandomItem(randomList)
-    password += randomChar
+    var index = Math.floor(Math.random() * characterOptions.length)
+    randomPassword += characterOptions[index]
   }
-  
-  return password
+  return randomPassword
 }
+
 
 // Write password to the #password input
 function writePassword() {
